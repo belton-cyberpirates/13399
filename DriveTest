@@ -1,0 +1,65 @@
+
+
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
+
+@TeleOp(name="BraedonDrive", group="Drive Codes")
+public class BraedonTestDrive extends LinearOpMode {
+    
+    static final int DRIVE_SPEED = 2000;
+    
+    private DcMotorEx backLeft;
+    private DcMotorEx backRight;
+    private DcMotorEx frontLeft;
+    private DcMotorEx frontRight;
+    
+    private Servo hand;
+
+    @Override
+    public void runOpMode() {
+        backLeft = hardwareMap.get(DcMotorEx.class, "back_left");
+        backRight = hardwareMap.get(DcMotorEx.class, "back_right");
+        frontLeft = hardwareMap.get(DcMotorEx.class, "front_left");
+        frontRight = hardwareMap.get(DcMotorEx.class, "front_right");
+        
+        hand = hardwareMap.get(Servo.class, "hand");
+
+        waitForStart();
+
+        while (opModeIsActive()) {
+            
+
+            double leftStickX = gamepad1.left_stick_x;
+            double leftStickY = gamepad1.left_stick_y;
+            
+            double rightStickX = gamepad1.right_stick_x;
+
+            
+            backLeft.setVelocity(
+                (-leftStickY - leftStickX + rightStickX) * DRIVE_SPEED
+            );
+            frontLeft.setVelocity(
+                (-leftStickY + leftStickX + rightStickX) * DRIVE_SPEED
+            );
+            frontRight.setVelocity(
+                (leftStickY + leftStickX + rightStickX) * DRIVE_SPEED
+            );
+            backRight.setVelocity(
+                (leftStickY - leftStickX + rightStickX) * DRIVE_SPEED
+            );
+            
+            // ---------- if a do openPos else closePos
+            double handPos = gamepad1.a ? 0.15 : 0.0;
+            hand.setPosition(handPos);
+            
+        }
+    }
+}
