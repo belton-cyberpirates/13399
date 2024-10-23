@@ -96,7 +96,11 @@ public class AutoTest {
       this.backLeft.setVelocity(velocity);
       this.backRight.setVelocity(velocity);
   }
-
+ void arm_move(int ticks, boolean waitForArm) {
+    this.setVelocity(Config.ARM_VELOCITY);
+    this.setTargetPosition(ticks)
+    while (waitForArm && arm.isBusy()) {}
+  }
   
   @Override
   public void runOpMode() {
