@@ -5,7 +5,7 @@ public class Config {
   public static final double STRAFE_DRIFT_COMPENSATION = 1;
   public static final double FWD_DRIFT_COMPENSATION = 1;
   public static final int TICKS_PER_360_DEG = 2009;
-  
+
   public static final double AUTONOMOUS_MOVE_SPEED = 0.4;
   public static final double AUTONOMOUS_DIAGONAL_SPEED = 0.45;
   public static final double AUTONOMOUS_TURN_SPEED = 0.4;
